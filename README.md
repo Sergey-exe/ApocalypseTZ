@@ -15,7 +15,7 @@ https://assetstore.unity.com/packages/tools/gui/pinepie-joystick-325958
 https://unity.com/ru/features/cinemachine
 
 
-Искуственный интелект*
+Искусственный интеллект*
 
 Во время выполнения тз я использовал чат гпт.
 Он помогал организовывать задачи, составить план выполнения тз в целом, а так-же я использовал его для поиска информации вместо Stack Overflow.
