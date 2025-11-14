@@ -18,20 +18,12 @@ public class EnemyMover : MonoBehaviour
 
     private void OnEnable()
     {
-        if(!_isInit)
-            return;
-        
-        _playerDetector.PlayerDetected += SetTarget;
-        _playerDetector.PlayerLost += RemoveTarget;
+        Activate();
     }
     
     private void OnDisable()
     {
-        if(!_isInit)
-            return;
-
-        _playerDetector.PlayerDetected -= SetTarget;
-        _playerDetector.PlayerLost -= RemoveTarget;
+        Deactivate();
     }
 
     private void Update()
@@ -44,20 +36,29 @@ public class EnemyMover : MonoBehaviour
 
     public void Init()
     {
-        _playerDetector.PlayerDetected += SetTarget;
-        _playerDetector.PlayerLost += RemoveTarget;
         _isInit = true;
     }
     
     public void Activate()
     {
         if (!_isInit)
-        {
-            Debug.LogWarning("Попытка активации не инициализированного класса!");
             return;
-        }
+        
+        _playerDetector.PlayerDetected += SetTarget;
+        _playerDetector.PlayerLost += RemoveTarget;
         
         _isActivate = true;
+    }
+
+    public void Deactivate()
+    {
+        if (!_isInit)
+            return;
+        
+        _playerDetector.PlayerDetected -= SetTarget;
+        _playerDetector.PlayerLost -= RemoveTarget;
+        
+        _isActivate = false;
     }
 
     public Transform GetTarget()

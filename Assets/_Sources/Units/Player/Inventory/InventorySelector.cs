@@ -17,22 +17,14 @@ public class InventorySelector : MonoBehaviour
     public event Action<Item> ItemSelected;
     public event Action Deselected;
 
-    private void OnDistroy()
+    private void OnDestroy()
     {
-        foreach (var item in _items)
-        {
-            item.GetActivateButton().onClick.RemoveListener(() => OnItemSelected(item));
-        }
+        Deactivate();
     }
     
     public void Init(List<Item> items)
     {
         _items = items ?? throw new ArgumentNullException(nameof(items));
-        
-        foreach (var item in _items)
-        {
-            item.GetActivateButton().onClick.AddListener(() => OnItemSelected(item));
-        }
         
         _isInit = true;
     }
@@ -40,12 +32,27 @@ public class InventorySelector : MonoBehaviour
     public void Activate()
     {
         if (!_isInit)
-        {
-            Debug.LogWarning("Попытка активации не инициализированного класса!");
             return;
+        
+        foreach (var item in _items)
+        {
+            item.GetActivateButton().onClick.AddListener(() => OnItemSelected(item));
         }
         
         _isActivate = true;
+    }
+
+    public void Deactivate()
+    {
+        if (!_isInit)
+            return;
+        
+        foreach (var item in _items)
+        {
+            item.GetActivateButton().onClick.RemoveListener(() => OnItemSelected(item));
+        }
+        
+        _isActivate = false;
     }
 
     private void OnItemSelected(Item item)

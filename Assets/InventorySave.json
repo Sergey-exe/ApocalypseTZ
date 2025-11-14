@@ -2,15 +2,15 @@
     "Items": [
         {
             "Type": 0,
-            "Count": 35
+            "Count": 0
         },
         {
             "Type": 1,
-            "Count": 13
+            "Count": 5
         },
         {
             "Type": 2,
-            "Count": 7
+            "Count": 1
         }
     ]
 }

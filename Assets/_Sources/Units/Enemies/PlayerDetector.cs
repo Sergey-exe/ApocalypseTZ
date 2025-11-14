@@ -25,24 +25,14 @@ public class PlayerDetector : MonoBehaviour
     public event Action<Transform> PlayerDetected;
     public event Action PlayerLost;
     
-    private void OnDisable()
-    {
-        if(!_isActivate)
-            return;
-
-        if (_checkCoroutine != null)
-        {
-            StopCoroutine(_checkCoroutine);
-            _checkCoroutine = null;
-        }
-    }
-
     private void OnEnable()
     {
-        if(!_isActivate)
-            return;
-        
-        _checkCoroutine = StartCoroutine(CheckLoop());
+        Activate();
+    }
+    
+    private void OnDisable()
+    {
+        Deactivate();
     }
 
     public void Init()
@@ -59,14 +49,25 @@ public class PlayerDetector : MonoBehaviour
     public void Activate()
     {
         if (!_isInit)
-        {
-            Debug.LogWarning("Попытка активации не инициализированного класса!");
             return;
-        }
         
         _checkCoroutine = StartCoroutine(CheckLoop());
         
         _isActivate = true;
+    }
+
+    public void Deactivate()
+    {
+        if (!_isInit)
+            return;
+        
+        if (_checkCoroutine != null)
+        {
+            StopCoroutine(_checkCoroutine);
+            _checkCoroutine = null;
+        }
+        
+        _isActivate = false;
     }
 
     private IEnumerator CheckLoop()

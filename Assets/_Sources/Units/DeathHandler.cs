@@ -19,23 +19,16 @@ public class DeathHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        if(!_isInit)
-            return;
-        
-        _health.IsDeaded += OnDead;
+        Activate();
     }
 
     private void OnDisable()
     {
-        if(!_isInit)
-            return;
-        
-        _health.IsDeaded -= OnDead;
+        Deactivate();
     }
 
     public void Init()
     {
-        _health.IsDeaded += OnDead;
         _isInit = true;
     }
     
@@ -47,7 +40,17 @@ public class DeathHandler : MonoBehaviour
             return;
         }
         
+        _health.IsDeaded += OnDead;
         _isActivate = true;
+    }
+
+    public void Deactivate()
+    {
+        if(!_isInit)
+            return;
+        
+        _health.IsDeaded -= OnDead;
+        _isActivate = false;
     }
 
     private void OnDead()

@@ -14,23 +14,16 @@ public class PlayerShooter : MonoBehaviour
 
     private void OnEnable()
     {
-        if (!_isInit)
-            return;
-        
-        _shotButton.onClick.AddListener(Shot);
+        Activate();
     }
 
     private void OnDisable()
     {
-        if (!_isInit)
-            return;
-        
-        _shotButton.onClick.RemoveListener(Shot);
+        Deactivate();
     }
     
     public void Init()
     {
-        _shotButton.onClick.AddListener(Shot);
         _isInit = true;
     }
     
@@ -38,12 +31,21 @@ public class PlayerShooter : MonoBehaviour
     public void Activate()
     {
         if (!_isInit)
-        {
-            Debug.LogWarning("Попытка активации не инициализированного класса!");
             return;
-        }
+        
+        _shotButton.onClick.AddListener(Shot);
         
         _isActivate = true;
+    }
+
+    public void Deactivate()
+    {
+        if (!_isInit)
+            return;
+        
+        _shotButton.onClick.RemoveListener(Shot);
+        
+        _isActivate = false;
     }
 
     public void Shot()

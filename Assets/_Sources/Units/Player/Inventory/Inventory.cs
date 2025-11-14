@@ -17,6 +17,16 @@ public class Inventory : MonoBehaviour
     private bool _isInit;
     private bool _isActivate;
 
+    private void OnEnable()
+    {
+        Activate();
+    }
+
+    private void OnDisable()
+    {
+        Deactivate();
+    }
+
     public void Init()
     {
         _save = new InventorySave();
@@ -27,21 +37,25 @@ public class Inventory : MonoBehaviour
 
         LoadSaves();
 
-        _itemDestroyer.Destroyed += Save;
-
         _isInit = true;
     }
 
     public void Activate()
     {
         if (!_isInit)
-        {
-            Debug.LogWarning("Попытка активации не инициализированного класса!");
             return;
-        }
 
+        _itemDestroyer.Destroyed += Save;
         _selector.Activate();
         _isActivate = true;
+    }
+
+    public void Deactivate()
+    {
+        if (!_isInit)
+            return;
+        
+        _itemDestroyer.Destroyed -= Save;
     }
 
     public void Add(ItemType type, int count)
