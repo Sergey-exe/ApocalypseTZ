@@ -2937,8 +2937,8 @@ MonoBehaviour:
   _poolMaxSize: 15
   _countSpawnObjects: 0
   _globalSpawn: 0
-  <MaxLifeTimeSeconds>k__BackingField: 60
-  <MinLifeTimeSeconds>k__BackingField: 60
+  <MaxLifeTimeSeconds>k__BackingField: 10
+  <MinLifeTimeSeconds>k__BackingField: 10
 --- !u!4 &1206797985
 Transform:
   m_ObjectHideFlags: 0

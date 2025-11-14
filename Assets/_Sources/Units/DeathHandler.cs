@@ -35,10 +35,7 @@ public class DeathHandler : MonoBehaviour
     public void Activate()
     {
         if (!_isInit)
-        {
-            Debug.LogWarning("Попытка активации не инициализированного класса!");
             return;
-        }
         
         _health.IsDeaded += OnDead;
         _isActivate = true;
