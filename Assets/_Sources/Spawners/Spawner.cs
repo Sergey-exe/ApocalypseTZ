@@ -93,8 +93,7 @@ public class Spawner<T> : MonoBehaviour where T : MonoBehaviour
             throw new ArgumentException($"{nameof(Spawner<T>)} not activate");
         
         T spawnObject = Instantiate(_prefab, vector3, transform.rotation);
-        
-        //spawnObject.transform.SetParent(transform);
+
         _countSpawnObjects++;
         Spawn?.Invoke(_countSpawnObjects);
         

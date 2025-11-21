@@ -151,7 +151,6 @@ public class InventorySave : ISerializationCallbackReceiver
     [NonSerialized]
     public Dictionary<ItemType, int> ItemCounts = new();
 
-    // Эти методы теперь вызываются Unity автоматически при сериализации JSON
     public void OnBeforeSerialize()
     {
         Items.Clear();

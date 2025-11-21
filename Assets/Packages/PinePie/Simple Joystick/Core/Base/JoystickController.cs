@@ -68,7 +68,6 @@ namespace PinePie.SimpleJoystick
                 joystickBase.anchoredPosition = newPos;
             }
 
-            // handle snappping
             if (baseMode != JoystickBaseMode.Static)
             {
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(
@@ -114,7 +113,6 @@ namespace PinePie.SimpleJoystick
 
             if (inputDirection != Vector2.zero) OnDirectionChanged?.Invoke();
 
-            // snap to directions
             if (directionSnaps > 1 && inputDirection != Vector2.zero)
             {
                 float angle = Vector2.SignedAngle(Vector2.left, inputDirection);
@@ -170,18 +168,15 @@ namespace PinePie.SimpleJoystick
                     Handles.DrawLine(start, end);
                 }
 
-                // handle range
                 Color cyanCol = Color.cyan;
                 Handles.color = new(cyanCol.r, cyanCol.g, cyanCol.b, 0.03f);
                 Handles.DrawSolidDisc(baseWorldPos, Vector3.forward, joystickRange);
                 Handles.color = cyanCol;
                 Handles.DrawWireDisc(baseWorldPos, Vector3.forward, joystickRange);
 
-                // dead zone
                 Handles.color = Color.red;
                 Handles.DrawWireDisc(baseWorldPos, Vector3.forward, joystickRange * deadZone);
 
-                // direction output
                 Handles.color = Color.white;
                 Handles.DrawLine(baseWorldPos, baseWorldPos + ((Vector3)inputDirection * joystickRange));
             }
