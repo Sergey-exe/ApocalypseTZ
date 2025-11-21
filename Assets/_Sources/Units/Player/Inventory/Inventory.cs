@@ -106,8 +106,7 @@ public class Inventory : MonoBehaviour
 
         foreach (var item in _items)
             _save.ItemCounts[item.Type] = item.Count;
-
-        // Перед сериализацией вызываем OnBeforeSerialize вручную
+        
         _save.OnBeforeSerialize();
 
         string json = JsonUtility.ToJson(_save, true);
@@ -126,8 +125,7 @@ public class Inventory : MonoBehaviour
 
         string json = File.ReadAllText(_path);
         _save = JsonUtility.FromJson<InventorySave>(json);
-
-        // После десериализации нужно восстановить словарь вручную
+        
         _save.OnAfterDeserialize();
 
         foreach (var item in _items)

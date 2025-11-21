@@ -32,7 +32,6 @@ public class PlayerHealth : Health
 
     private void SaveHealth()
     {
-        // Небольшой класс для хранения одного числа
         var save = new HealthSave { CurrentHealth = CurrentHealth };
         string json = JsonUtility.ToJson(save, true);
         File.WriteAllText(_path, json);
